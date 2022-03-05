@@ -8,18 +8,22 @@ internal static class Program
 
 	internal static void Main()
 	{
-		Helper.CheckBuckets(); // для 50к: 75431
+		Helper.CheckBuckets(); // для 500к: 672827
 
 		var defaultFilling = new Action(() =>
 		{
 			var count = Enumerable.Range(0, DictionaryLength).ToDictionary(i => i, i => "Value").Count;
 		});
-
-		// TODO Сделать Action, меделнно заполняющий Dictionary;
+		
+		var slowlyFilling = new Action(() =>
+		{
+			var count = Enumerable.Range(0, DictionaryLength).ToDictionary(i => i * 672827, i => "Value").Count;
+		});
 
 		Console.WriteLine(Helper.MeasureTime(defaultFilling));
+		Console.WriteLine(Helper.MeasureTime(slowlyFilling));
 
-		// Какое время на вашем ПК для обоих Action
+		// 22 1313
 	}
 }
 
